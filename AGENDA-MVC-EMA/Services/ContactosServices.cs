@@ -103,7 +103,7 @@ namespace AGENDA_MVC_EMA.Services
                 return new MensajeContactosDTO()
                 {
                     estado = "Borrado",
-                    Mensaje = $"El tablero con id: {idContacto} fue borrado correctamente"
+                    Mensaje = $"El contacto con id: {idContacto} fue borrado correctamente"
                 };
             }
             else
@@ -111,7 +111,7 @@ namespace AGENDA_MVC_EMA.Services
                 return new MensajeContactosDTO()
                 {
                     estado = "Error",
-                    Mensaje = $"El tablero con id: {idContacto} no existe en la base de datos"
+                    Mensaje = $"El contacto con id: {idContacto} no existe en la base de datos"
                 };
             }
 
