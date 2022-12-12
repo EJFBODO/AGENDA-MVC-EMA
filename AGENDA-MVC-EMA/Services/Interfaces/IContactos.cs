@@ -9,7 +9,7 @@ namespace AGENDA_MVC_EMA.Services.Interfaces
 
         public bool crearContacto(CreateContactosDTO nuevoContacto, string idUserCurrent);
 
-        public bool updateContacto(UpdateContactosDTO uc, string idUserCurrent);
+        public Task <bool> updateContacto(UpdateContactosDTO uc, string idUserCurrent);
 
         public MensajeContactosDTO borrarContacto(int idContacto, string idUserCurrent);
     }

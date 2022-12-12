@@ -83,11 +83,11 @@ namespace AGENDA_MVC_EMA.Controllers
         [Authorize]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public IActionResult EditPost(UpdateContactosDTO update, string idUser)
+        public async Task <IActionResult> EditPost(UpdateContactosDTO update, string idUser)
 
         {
             var idUserCurrent = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var updateContacto = _contactosServices.updateContacto(update, idUserCurrent);
+            var updateContacto = await _contactosServices.updateContacto(update, idUserCurrent);
 
             if (updateContacto)
             {

@@ -57,8 +57,8 @@ namespace AGENDA_MVC_EMA.Services
                 Apellido = nuevoContacto.Apellido,
                 Edad = nuevoContacto.Edad,
                 Direccion = nuevoContacto.Direccion,
-                Telefono = nuevoContacto.Telefono
-
+                Telefono = nuevoContacto.Telefono,
+                idUser = idUser   
             };
 
             var result = _context.Contactos.Add(c);
@@ -66,15 +66,15 @@ namespace AGENDA_MVC_EMA.Services
             return true;
         }
 
-        public bool updateContacto(UpdateContactosDTO uc, string idUser)
+        public async Task <bool> updateContacto(UpdateContactosDTO uc, string idUser)
         {
 
-            var user = _userManager.FindByIdAsync(idUser);
+            var user = await _userManager.FindByIdAsync(idUser);
 
-            var contacto = _context.Contactos
+            var contacto = await _context.Contactos
              
             .Where(c => c.Id== uc.Id)
-            .FirstOrDefault();
+            .FirstAsync();
 
 
             if (contacto != null)
@@ -84,7 +84,7 @@ namespace AGENDA_MVC_EMA.Services
                 contacto.Edad=uc.Edad;
                 contacto.Direccion=uc.Direccion;
                 contacto.Telefono = uc.Telefono;
-                _context.SaveChanges();
+                _ = _context.SaveChangesAsync();
                 return true;
             }
             return false;
