@@ -1,0 +1,66 @@
+﻿@using AGENDA_MVC_EMA.DTOS
+@model IEnumerable<ResponseContactosDTO>
+@{
+}
+<h1>MIS CONTACTOS</h1>
+
+    @foreach(var c in Model){
+
+  
+       
+    <table class="table table-dark table-striped-columns">
+        <thead>
+            <tr>
+     
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Telefono</th>
+         </tr>
+  </thead>
+   <tbody>
+     <tr>
+     
+      <td>@Html.DisplayFor(m => c.Nombre)</td>
+      <td>@Html.DisplayFor(m => c.Apellido)</td>
+      <td>@Html.DisplayFor(m => c.Edad)</td>
+      <td>@Html.DisplayFor(m => c.Direccion)</td>
+      <td>@Html.DisplayFor(m => c.Telefono)</td>
+ 
+    <a style="text-decoration:none;" asp-action="Borrar" asp-route-id="@c.Id">
+   <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+       </a>
+    <a style="text-decoration:none;" asp-action="Edit" asp-route-id="@c.Id">
+  <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>
+
+
+                    </a>
+              </tr>
+             
+
+                     </tbody>
+           
+                   </table>
+     
+    
+   
+}
+@if (Model.Count() == 0)
+{
+    <div class="col-3">
+<a class="btn btn-danger mt-3" asp-area="" asp-controller="Contactos" asp-action="Form">Agregar Contacto (no existen contactos)</a>
+        </div>
+    }
+    else
+    {
+ 
+<div class="col-3">
+<a class="btn btn-primary mt-3" asp-area="" asp-controller="Contactos" asp-action="Form">Agregar Contacto</a>
+</div>
+}
+
+</>
+
+
+

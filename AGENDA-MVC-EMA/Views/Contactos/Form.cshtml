@@ -1,0 +1,41 @@
+﻿@model AGENDA_MVC_EMA.DTOS.CreateContactosDTO
+@*
+    
+*@
+@{
+}
+<div class="col-4">
+    <form asp-action="CreateContacto">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+    <input type="text" asp-for="Nombre" class="form-control" id="nombreContacto" aria-describedby="emailHelp">
+    <div id="TableroHelp" class="form-text">Inserte nombre de Contacto</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Apellido</label>
+    <input type="text" asp-for="Apellido" class="form-control" id="apellidoContacto">
+    <div id="DescripcionHelp" class="form-text">Inserte apellido del contacto</div>
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Edad</label>
+    <input type="text" asp-for="Edad" class="form-control" id="edadContacto">
+    <div id="DescripcionHelp" class="form-text">Inserte edad del contacto</div>
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Direccion</label>
+    <input type="text" asp-for="Direccion" class="form-control" id="direccionContacto">
+    <div id="DescripcionHelp" class="form-text">Inserte direccion del contacto</div>
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Telefono</label>
+    <input type="text" asp-for="Telefono" class="form-control" id="telefonoContacto">
+    <div id="DescripcionHelp" class="form-text">Inserte telefono del contacto</div>
+  </div>
+  <div class="mb-3 form-check">
+   
+    
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+</div>
+
