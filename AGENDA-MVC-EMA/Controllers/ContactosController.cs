@@ -23,19 +23,19 @@ namespace AGENDA_MVC_EMA.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var idUserCurrent = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = _contactosServices.getContactos(idUserCurrent);
+            var response = await _contactosServices.getContactos(idUserCurrent);
             return View(response);
         }
 
-        public IActionResult get(int idContacto)
+        public async Task<IActionResult> get(int idContacto)
 
         {
 
 
-            var response = _contactosServices.getContacto(idContacto);
+            var response = await _contactosServices.getContacto(idContacto);
             return View(response);
         }
 
@@ -45,21 +45,21 @@ namespace AGENDA_MVC_EMA.Controllers
         }
         [Authorize]
         [HttpPost]
-        public IActionResult CreateContacto(CreateContactosDTO contacto, String idUser)
+        public async Task<IActionResult> CreateContacto(CreateContactosDTO contacto, String idUser)
 
         {
             var idUserCurrent = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = _contactosServices.crearContacto(contacto, idUserCurrent);
+            var response = await _contactosServices.crearContacto(contacto, idUserCurrent);
             return RedirectToAction("Index");
 
         }
 
         [Authorize]
-        public IActionResult Borrar(int Id, string idUser)
+        public async Task<IActionResult> Borrar(int Id, string idUser)
 
         {
             var idUserCurrent = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = _contactosServices.borrarContacto(Id, idUserCurrent);
+            var response = await _contactosServices.borrarContacto(Id, idUserCurrent);
             return RedirectToAction("Index");
         }
 

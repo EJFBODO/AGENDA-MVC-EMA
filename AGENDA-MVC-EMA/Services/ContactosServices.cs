@@ -17,9 +17,9 @@ namespace AGENDA_MVC_EMA.Services
             _userManager = userManager;
         }
 
-        public IEnumerable<ResponseContactosDTO> getContactos(string IdUser)
+        public async Task<IEnumerable<ResponseContactosDTO>> getContactos(string IdUser)
         {
-            var listadoContactos = _context.Contactos
+            var listadoContactos = await _context.Contactos
              .Include(x => x.User)
              .Where(c => c.idUser.Equals(IdUser))
              .Select(c => new ResponseContactosDTO(c)
@@ -31,15 +31,15 @@ namespace AGENDA_MVC_EMA.Services
                  Direccion = c.Direccion,
                  Telefono = c.Telefono
              })
-                .ToList();
+               .ToListAsync();
 
             return listadoContactos;
         }
 
 
-        public ResponseContactosDTO getContacto(int idContacto)
+        public async Task<ResponseContactosDTO> getContacto(int idContacto)
         {
-            var contacto = _context.Contactos
+            var contacto =  _context.Contactos
                   .Where(c => c.Id == idContacto)
                  .Select(t => new ResponseContactosDTO(t))
                  .FirstOrDefault();
@@ -47,9 +47,9 @@ namespace AGENDA_MVC_EMA.Services
             return contacto;
         }
 
-        public bool crearContacto(CreateContactosDTO nuevoContacto, string idUser)
+        public async Task <bool> crearContacto(CreateContactosDTO nuevoContacto, string idUser)
         {
-            var user = _userManager.FindByIdAsync(idUser);
+            var user = await _userManager.FindByIdAsync(idUser);
 
             var c = new Contactos()
             {
@@ -62,7 +62,7 @@ namespace AGENDA_MVC_EMA.Services
             };
 
             var result = _context.Contactos.Add(c);
-            _context.SaveChanges();
+            _ = _context.SaveChangesAsync();
             return true;
         }
 
@@ -90,10 +90,10 @@ namespace AGENDA_MVC_EMA.Services
             return false;
         }
 
-        public MensajeContactosDTO borrarContacto(int idContacto, string idUser)
+        public async Task<MensajeContactosDTO> borrarContacto(int idContacto, string idUser)
         {
 
-            var user = _userManager.FindByIdAsync(idUser);
+            var user = await _userManager.FindByIdAsync(idUser);
             var contacto = _context.Contactos.Where(c => c.Id == idContacto).FirstOrDefault();
 
             if (contacto != null)
