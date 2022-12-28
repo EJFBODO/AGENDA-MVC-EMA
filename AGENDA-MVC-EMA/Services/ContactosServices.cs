@@ -39,15 +39,15 @@ namespace AGENDA_MVC_EMA.Services
 
         public async Task<ResponseContactosDTO> getContacto(int idContacto)
         {
-            var contacto =  _context.Contactos
+            var contacto = await _context.Contactos
                   .Where(c => c.Id == idContacto)
                  .Select(t => new ResponseContactosDTO(t))
-                 .FirstOrDefault();
+                 .FirstOrDefaultAsync();
 
             return contacto;
         }
 
-        public async Task <bool> crearContacto(CreateContactosDTO nuevoContacto, string idUser)
+        public async Task<bool> crearContacto(CreateContactosDTO nuevoContacto, string idUser)
         {
             var user = await _userManager.FindByIdAsync(idUser);
 
@@ -58,7 +58,7 @@ namespace AGENDA_MVC_EMA.Services
                 Edad = nuevoContacto.Edad,
                 Direccion = nuevoContacto.Direccion,
                 Telefono = nuevoContacto.Telefono,
-                idUser = idUser   
+                idUser = idUser
             };
 
             var result = _context.Contactos.Add(c);
@@ -66,14 +66,14 @@ namespace AGENDA_MVC_EMA.Services
             return true;
         }
 
-        public async Task <bool> updateContacto(UpdateContactosDTO uc, string idUser)
+        public async Task<bool> updateContacto(UpdateContactosDTO uc, string idUser)
         {
 
             var user = await _userManager.FindByIdAsync(idUser);
 
             var contacto = await _context.Contactos
-             
-            .Where(c => c.Id== uc.Id)
+
+            .Where(c => c.Id == uc.Id)
             .FirstAsync();
 
 
@@ -81,8 +81,8 @@ namespace AGENDA_MVC_EMA.Services
             {
                 contacto.Nombre = uc.Nombre;
                 contacto.Apellido = uc.Apellido;
-                contacto.Edad=uc.Edad;
-                contacto.Direccion=uc.Direccion;
+                contacto.Edad = uc.Edad;
+                contacto.Direccion = uc.Direccion;
                 contacto.Telefono = uc.Telefono;
                 _ = _context.SaveChangesAsync();
                 return true;

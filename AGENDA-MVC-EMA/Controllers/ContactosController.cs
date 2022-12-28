@@ -63,14 +63,14 @@ namespace AGENDA_MVC_EMA.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
             if (Id == null)
             {
                 return NotFound();
             }
 
-            var contacto = _contactosServices.getContacto(Id);
+            var contacto = await _contactosServices.getContacto(Id);
 
             if (contacto == null)
             {
@@ -83,7 +83,7 @@ namespace AGENDA_MVC_EMA.Controllers
         [Authorize]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> EditPost(UpdateContactosDTO update, string idUser)
+        public async Task<IActionResult> EditPost(UpdateContactosDTO update, string idUser)
 
         {
             var idUserCurrent = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
